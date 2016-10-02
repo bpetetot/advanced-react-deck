@@ -1,0 +1,1 @@
+{condition && <span>Rendered when `truthy`</span> }

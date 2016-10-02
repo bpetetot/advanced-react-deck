@@ -1,0 +1,11 @@
+.chuck-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.chuck-header img {
+  width: 250px;
+  border: 8px solid white;
+  cursor: pointer;
+}

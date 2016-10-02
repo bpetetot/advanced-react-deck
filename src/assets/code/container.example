@@ -1,0 +1,18 @@
+class FactContainer extends React.Component {
+
+  constructor() {
+    super();
+    this.state = { fact: "" }
+  }
+
+  componentDidMount() {
+    fetch('/facts.json')
+      .then(response => response.json())
+      .then(json => this.setState({ fact: json[0] }))
+  }
+
+  render() {
+    return <Fact text={this.state.fact} />;
+  }
+
+}

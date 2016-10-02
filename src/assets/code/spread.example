@@ -1,0 +1,21 @@
+
+// Stateless function
+const Fact = (props) => (
+  <div className={props.className}>
+    {this.props.text}
+  </div>
+);
+
+// Destructuring arguments
+const Fact = ({text, className}) => (
+  <div className={className}>
+    {text}
+  </div>
+);
+
+// With JSX Spread attributes
+const Fact = ({text, ...rest}) => (
+  <div {...rest}>
+    {text}
+  </div>
+);

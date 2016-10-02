@@ -1,0 +1,7 @@
+const Fact = ({text, chuck, name, ...rest}) => {
+  if (chuck) {
+    return <div {...rest}>{text}</div>;
+  } else {
+    return <div {...rest}>{text.replace('Chuck Norris', name)}</div>
+  }
+}

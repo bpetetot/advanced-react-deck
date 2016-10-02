@@ -1,0 +1,4 @@
+{condition
+  ? <span>Rendered when `truthy`</span>
+  : <span>Rendered when `falsey`</span>
+}

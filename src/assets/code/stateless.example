@@ -1,0 +1,14 @@
+const Fact = (props) => (
+  <div className={props.className}>
+    {this.props.text}
+  </div>
+);
+
+Fact.propTypes = {
+  text: React.PropTypes.string,
+  className: React.PropTypes.string
+}
+
+Fact.defaultProps = {
+  text: 'No facts'
+}

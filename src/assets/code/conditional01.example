@@ -1,0 +1,13 @@
+const Chuck = ({ facts, score, belgium, ...actions }) => (
+  <div>
+    <div className="chuck-header">
+      <FactsStat title="Facts" count={facts.length} onClick={actions.onClearFacts} />
+      {(belgium) 
+        ? <JCVDImage onClick={actions.onAddFact} />
+        : <ChuckImage onClick={actions.onAddFact} />
+      }
+      <FactsStat title="Score" count={score} />
+    </div>
+    {facts.map((f) => <Fact key={f.id} belgium={belgium} />)}
+  </div>
+)

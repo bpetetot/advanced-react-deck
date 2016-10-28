@@ -1,0 +1,17 @@
+const themed = (ComponentToWrap) => {
+
+  class ThemeComponent extends Component {
+    render() {
+      const { theme } = this.context
+      return (
+        <ComponentToWrap {…this.props} theme={theme} />
+      )
+    }
+  }
+
+  ThemeComponent.contextTypes = {
+    theme: PropTypes.object.isRequired,
+  }
+
+  return ThemeComponent
+}

@@ -1,46 +1,31 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Fact from './Fact'
-import FactsCounter from './FactsCounter'
-import FactsScore from './FactsScore'
+import FactsStat from './FactsStat'
 import ChuckImage from './ChuckImage'
-
-import img from './assets/chuck.jpg'
+import JCVDImage from './JCVDImage'
 
 import './Chuck.css'
 
-class Chuck extends Component {
-
-  handleImageClick = () => () => {
-    if (this.props.onAddFact) {
-      this.props.onAddFact()
-    }
-  }
-
-  handleCounterClick = () => () => {
-    if (this.props.onClearFacts) {
-      this.props.onClearFacts()
-    }
-  }
-
-  render() {
-    const { facts, score } = this.props
-    return (
-      <div>
-        <div className="chuck-header">
-          <FactsCounter count={facts.length} onClick={this.handleCounterClick()} />
-          <ChuckImage url={img} onClick={this.handleImageClick()} />
-          <FactsScore score={score} />
-        </div>
-        {facts.map((fact, i) => <Fact key={i} text={fact} />)}
+const Chuck = ({ facts, score, belgium, ...actions }) => {
+  return (
+    <div>
+      <div className="chuck-header">
+        <FactsStat title="Facts" count={facts.length} onClick={actions.onClearFacts} />
+        {!belgium
+          ? <ChuckImage onClick={actions.onAddFact} />
+          : <JCVDImage onClick={actions.onAddFact} />}
+        <FactsStat title="Score" count={score} />
       </div>
-    )
-  }
+      {facts.map((f) => <Fact key={f.id} text={f.fact} belgium={belgium} />)}
+    </div>
+  )
 }
 
 Chuck.propTypes = {
   facts: React.PropTypes.array,
   score: React.PropTypes.number,
+  belgium: React.PropTypes.bool,
   onAddFact: React.PropTypes.func,
   onClearFacts: React.PropTypes.func,
 }

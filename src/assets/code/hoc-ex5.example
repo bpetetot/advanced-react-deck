@@ -1,0 +1,18 @@
+const fetchResource = get => WrappedComponent =>
+  class extends React.Component {
+
+    state = { resource: null }
+
+    componentDidMount() {
+      get(this.props)
+        .then(resource => this.setState({ resource }))
+    }
+
+    render() {
+      const { resource } = this.state
+      return <WrappedComponent {...this.props} {...resource} />
+    }
+  }
+
+const fetchFact = fetchResource(props => fetch(`/facts/${props.id}`))
+const FactContainer = fetchFact(Fact)

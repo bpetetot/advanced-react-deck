@@ -1,0 +1,12 @@
+export default const Chuck = ({facts, score, onClearFacts, onAddFact, ...rest}) => {
+  return (
+    <div {...rest}>
+      <div className="chuck-header">
+        <FactsStat title="Facts" count={facts.length} onClick={onClearFacts} />
+        <ChuckImage onClick={onAddFact} />
+        <FactsStat title="Score" count={score} />
+      </div>
+      {facts.map((f) => <Fact key={f.id} text={f.fact} />)}
+    </div>
+  )
+}

@@ -1,0 +1,14 @@
+class ParentComponent extends React.Component {
+  render() {
+    return (
+      <div onKeyUp={this.handleKeyUp.bind(this)}>
+        // Any number of child components can be added here.
+      </div>
+    );
+  }
+
+  handleKeyUp(event) {
+    // This function will be called for the 'onkeyup' event in any <input/>
+    // fields rendered by any of my child components.
+  }
+}

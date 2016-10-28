@@ -1,13 +1,14 @@
 import React from 'react'
 
-const Fact = ({ text, ...rest }) => (
+const Fact = ({ text, belgium, ...rest }) => (
   <div {...rest}>
-    {text}
+    {!belgium ? text : text.replace('Chuck Norris', 'JCVD')}
   </div>
 )
 
 Fact.propTypes = {
   text: React.PropTypes.string,
+  belgium: React.PropTypes.bool,
 }
 
 Fact.defaultProps = {

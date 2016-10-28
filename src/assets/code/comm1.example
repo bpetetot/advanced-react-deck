@@ -1,0 +1,11 @@
+class TheParent extends React.Component {
+  render() {
+    return (
+      <TheChild ref='foo' />
+    )
+  }
+  componentDidMount() {
+    var x = this.refs.foo.myFunc();
+    // Call myFunc() of <TheChild/>
+  }
+}

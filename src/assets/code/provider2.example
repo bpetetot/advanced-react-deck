@@ -1,0 +1,11 @@
+const theme = {
+  color: "#cc3300",
+  fontFamily: "Georgia",
+}
+
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>,
+  document.querySelector("#App")
+)

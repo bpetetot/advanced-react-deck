@@ -18,19 +18,13 @@ class ChuckContainer extends Component {
 
   updateFacts() {
     const randomFact = factsJson[Math.floor(Math.random() * factsJson.length)]
-    const currentFacts = [...this.state.facts]
-    currentFacts.push(randomFact.fact)
-    this.setState({
-      facts: currentFacts,
-      score: 0,
-    })
+    const newFacts = [...this.state.facts, randomFact]
+    const newScore = this.state.score + Number(randomFact.points)
+    this.setState({ facts: newFacts, score: newScore })
   }
 
   clearFacts() {
-    this.setState({
-      facts: [],
-      score: 0,
-    })
+    this.setState({ facts: [], score: 0 })
   }
 
   render() {
@@ -40,6 +34,7 @@ class ChuckContainer extends Component {
         score={this.state.score}
         onAddFact={this.updateFacts}
         onClearFacts={this.clearFacts}
+        {...this.props}
       />
     )
   }

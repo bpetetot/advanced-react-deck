@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react'
 
 import {
@@ -19,7 +20,7 @@ import {
 import preloader from 'spectacle/lib/utils/preloader'
 
 // Import theme
-import createTheme from 'spectacle/lib/themes/default'
+import createTheme from './theme'
 
 import Chuck from '../chuckapp/ChuckContainer'
 
@@ -31,34 +32,33 @@ const images = {
   nantes: require('../assets/images/nantes.jpg'),
   react: require('../assets/images/react-logo.png'),
   flux: require('../assets/images/flux.png'),
+  fluxDiagram: require('../assets/images/flux-diagram2.png'),
   avatar: require('../assets/images/avatar.png'),
+  parentToChild: require('../assets/images/parent-to-child.png'),
+  childToParent: require('../assets/images/child-to-parent.png'),
+  siblingToSibling: require('../assets/images/sibling-to-sibling.png'),
+  anyToAny: require('../assets/images/any-to-any.png'),
 }
 
 preloader(images)
 
-const theme = createTheme({
-  primary: '#2d2d2d',
-  secondary: '#61dafb',
-  fluxColor: '#44b74a',
-}, {
-  secondary: 'Open Sans Condensed',
-})
+const theme = createTheme({ fluxColor: '#44b74a' })
 
 class Presentation extends React.Component {
 
   render() {
     return (
       <Spectacle theme={theme}>
-        <Deck transition={['zoom', 'slide']} transitionDuration={500}>
+        <Deck transition={['zoom', 'slide']} progress="bar" transitionDuration={500}>
 
           {/* Cover */}
-          <Slide transition={['zoom']} bgColor="primary">
+          <Slide transition={['zoom']}>
             <Image src={images.react.replace('/', '')} height="200px" />
             <Heading size={1} fit caps textColor="secondary">
               Advanced React
             </Heading>
             <Heading size={1} fit caps>
-              Design, Style & Performance patterns & tips
+              Design patterns & tips
             </Heading>
           </Slide>
 
@@ -75,12 +75,19 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* ChuckNorris */}
-          <Slide transition={['slide']} align="center flex-start" bgColor="primary">
-            <Heading size={4} caps textColor="tertiary" >
+          <Slide transition={['slide']} align="center flex-start">
+            <Heading size={2} textColor="tertiary" >
               {'<Chuck />'}
             </Heading>
             <br />
             <Chuck />
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              source={require('raw!../assets/code/chuck.example')}
+            />
           </Slide>
 
           {/* Components patterns & tips */}
@@ -90,27 +97,24 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* Presentational component */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
+          <Slide transition={['slide', 'spin']}>
             <Heading caps fit size={1} textColor="secondary">Presentational</Heading>
             <Heading caps fit size={1} textColor="tertiary">Component</Heading>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']} notes="Examples : Page, Sidebar, Story, UserInfo, List">
             <Text caps bold textColor="secondary" textAlign="left">Presentational component</Text>
             <List textColor="tertiary">
-              <ListItem>Are concerned with <b>how things look</b></ListItem>
-              <Appear><ListItem>Have no dependencies on the rest of the app</ListItem></Appear>
-              <Appear><ListItem>Don’t specify how the data is loaded or mutated</ListItem></Appear>
-              <Appear><ListItem>Receive data and callbacks exclusively via props</ListItem></Appear>
-              <Appear><ListItem>Rarely have their own state</ListItem></Appear>
-              <Appear><ListItem>Usually written as stateless functions</ListItem></Appear>
-              <Appear>
-                <ListItem><u>Examples</u> : Page, Sidebar, Story, UserInfo, List</ListItem>
-              </Appear>
+              <ListItem><b>How things look</b></ListItem>
+              <Appear><ListItem>No dependencies</ListItem></Appear>
+              <Appear><ListItem>Don’t specify how the data is mutated</ListItem></Appear>
+              <Appear><ListItem>Data and callbacks via props</ListItem></Appear>
+              <Appear><ListItem>Rarely stateful</ListItem></Appear>
+              <Appear><ListItem>Usually stateless functions</ListItem></Appear>
             </List>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']}>
             <Text caps bold textColor="secondary" textAlign="left">Presentational component</Text>
             <Text textColor="tertiary" textAlign="left" margin="0 0 20px">
               with stateless function
@@ -119,77 +123,83 @@ class Presentation extends React.Component {
               <Fit>
                 <CodePane
                   lang="jsx"
+                  textSize="1.2rem"
                   source={require('raw!../assets/code/stateless.example')}
                   margin="20px"
                 />
               </Fit>
               <Fill>
-                <List margin="20px" textColor="tertiary" >
+                <List textColor="tertiary" >
                   <Appear>
-                    <ListItem textSize="0.9em">It’s a pure function</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Props & Context</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem textSize="0.9em">Don't have the lifecycle methods</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">No lifecycle methods</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem textSize="0.9em">Don’t hold state or refs</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">No this, state or refs</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem textSize="0.9em">Pass props and context</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">DefaultProps & PropTypes</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem textSize="0.9em">Can defined defaultProps, propTypes</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Pure function</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem textSize="0.9em">Easy to test</ListItem>
-                  </Appear>
-                  <Appear>
-                    <ListItem textSize="0.9em">Optimized for performances</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Easy to test</ListItem>
                   </Appear>
                 </List>
               </Fill>
             </Layout>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']}>
             <BlockQuote>
-              <Quote textSize="1.5em" textColor="tertiary">
+              <Quote>
                 In an ideal world, most of your components would be stateless functions [...]
                 This is the recommended pattern, when possible.
               </Quote>
-              <Cite textSize="1em" textColor="secondary">React documentation</Cite>
+              <Cite>React documentation</Cite>
             </BlockQuote>
           </Slide>
 
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1rem"
+              source={require('raw!../assets/code/chuck2.example')}
+            />
+          </Slide>
+
           {/* Container component */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
+          <Slide transition={['slide', 'spin']}>
             <Heading caps fit size={1} textColor="secondary">Container</Heading>
             <Heading caps fit size={1} textColor="tertiary">Component</Heading>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']}>
             <Text caps bold textColor="secondary" textAlign="left">Container component</Text>
             <List textColor="tertiary">
-              <ListItem>Are concerned with <b>how things work</b></ListItem>
+              <ListItem><b>How things work</b></ListItem>
               <Appear>
-                <ListItem>Provide the data and behavior to presentational</ListItem>
+                <ListItem>Provide data and behavior</ListItem>
               </Appear>
               <Appear>
-                <ListItem>Provide actions as callbacks to the presentational</ListItem>
+                <ListItem>Provide actions (callbacks)</ListItem>
               </Appear>
               <Appear>
-                <ListItem>Are often stateful, as they tend to serve as data sources</ListItem>
+                <ListItem>Mostly stateful</ListItem>
               </Appear>
               <Appear>
-                <ListItem>Are usually generated using higher order components</ListItem>
+                <ListItem>Fetch data sources</ListItem>
               </Appear>
               <Appear>
-                <ListItem><u>Examples</u> : UserPage, FollowersSidebar, StoryContainer</ListItem>
+                <ListItem>Usually HOC</ListItem>
               </Appear>
             </List>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']}>
             <Text caps bold textColor="secondary" textAlign="left">Container component</Text>
             <Layout>
               <Fit>
@@ -202,20 +212,20 @@ class Presentation extends React.Component {
               <Fill>
                 <List margin="20px" textColor="tertiary">
                   <Appear>
-                    <ListItem textSize="0.9em">Can be stateful and/or stateless</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Stateful and/or stateless</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem textSize="0.9em">Separate data-fetching and rendering</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Separate data-fetching and rendering</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem textSize="0.9em">Made 'Fact' component reusable</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Make 'Fact' component reusable</ListItem>
                   </Appear>
                 </List>
               </Fill>
             </Layout>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']}>
             <BlockQuote>
               <Quote textSize="1.5em" textColor="tertiary">
                 A container does data fetching and then renders its corresponding sub-component.
@@ -225,14 +235,21 @@ class Presentation extends React.Component {
             </BlockQuote>
           </Slide>
 
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              source={require('raw!../assets/code/chuck3.example')}
+            />
+          </Slide>
+
           {/* Presentational vs. Container */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
+          <Slide transition={['slide', 'spin']}>
             <Heading caps fit size={1} textColor="tertiary">Presentational component</Heading>
             <Heading caps size={2} textColor="secondary">vs</Heading>
             <Heading caps fit size={1} textColor="tertiary">Container component</Heading>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']}>
             <Text caps bold textColor="secondary" textAlign="left">
               Presentational vs. Container
             </Text>
@@ -240,27 +257,160 @@ class Presentation extends React.Component {
               <Appear><ListItem>Better separation of concerns</ListItem></Appear>
               <Appear><ListItem>Better reusability</ListItem></Appear>
               <Appear>
-                <ListItem>Presentational components are your app’s “palette”</ListItem>
+                <ListItem>Presentationals == app’s “palette”</ListItem>
               </Appear>
-            </List>
-            <Appear>
-              <Text caps bold textColor="secondary" textAlign="left">Other concepts</Text>
-            </Appear>
-            <List textColor="tertiary">
-              <Appear><ListItem>Stateful vs. Stateless</ListItem></Appear>
-              <Appear><ListItem>Classes vs. Functions</ListItem></Appear>
-              <Appear><ListItem>Pure vs. Impure</ListItem></Appear>
             </List>
           </Slide>
 
+          <Slide transition={['fade']}>
+            <Text caps bold textColor="secondary" textAlign="left">Other concepts</Text>
+            <List textColor="tertiary">
+              <Appear><ListItem>Stateful vs. Stateless</ListItem></Appear>
+              <Appear><ListItem>Classes vs. Functions</ListItem></Appear>
+              <Appear><ListItem>Impure vs. Pure</ListItem></Appear>
+            </List>
+          </Slide>
+
+          {/* Higher Order Component */}
+          <Slide transition={['slide', 'spin']}>
+            <Heading caps fit size={1} textColor="secondary">Higher-Order</Heading>
+            <Heading caps fit size={1} textColor="tertiary">Component</Heading>
+          </Slide>
+
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Text caps bold textColor="secondary" textAlign="left">What is a HOC ?</Text>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.8rem" margin="30px"
+                source={require('raw!../assets/code/hoc1.example')}
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.8rem" margin="30px"
+                source={require('raw!../assets/code/hoc2.example')}
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.8rem" margin="30px"
+                source={require('raw!../assets/code/hoc3.example')}
+              />
+            </Appear>
+          </Slide>
+
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Text caps bold textColor="secondary" textAlign="left">Some Examples</Text>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.2rem"
+                source={require('raw!../assets/code/hoc-ex2.example')}
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.2rem"
+                source={require('raw!../assets/code/hoc-ex3.example')}
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.2rem"
+                source={require('raw!../assets/code/hoc-ex1.example')}
+              />
+            </Appear>
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <Text caps bold textColor="secondary" textAlign="left">How do HOCs work ?</Text>
+            <Appear>
+              <BlockQuote>
+                <Quote textSize="1.5em" textColor="tertiary">
+                  Higher-order components works by secretly wrapping the input
+                   component inside a container component.
+                </Quote>
+                <Cite textSize="1em" textColor="secondary">Andrew Clark (Facebook)</Cite>
+              </BlockQuote>
+            </Appear>
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.2rem"
+              source={require('raw!../assets/code/hoc-ex4.example')}
+            />
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.2rem"
+              source={require('raw!../assets/code/hoc-ex5.example')}
+            />
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.3rem"
+              source={require('raw!../assets/code/hoc-ex6.example')}
+            />
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <BlockQuote>
+              <Quote textSize="1.5em" textColor="tertiary">
+                Higher-order components are parameterized container components.
+              </Quote>
+              <Cite textSize="1em" textColor="secondary">Andrew Clark (Facebook)</Cite>
+            </BlockQuote>
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <Text caps bold textColor="secondary" textAlign="left">recompose</Text>
+            <br />
+            <Text textColor="secondary" textAlign="left">https://github.com/acdlite/recompose</Text>
+            <br />
+            <BlockQuote>
+              <Quote textSize="1.5em" textColor="tertiary">
+                Recompose is a React utility belt for function components and higher-order components.
+                 Think of it like lodash for React.
+              </Quote>
+              <Cite textSize="1em" textColor="secondary">Recompose documentation</Cite>
+            </BlockQuote>
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.3rem"
+              source={require('raw!../assets/code/recompose.example')}
+            />
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={require('raw!../assets/code/recompose2.example')}
+            />
+          </Slide>
+
           {/* JSX spread attributes & Destructuring arguments */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
+          <Slide transition={['slide', 'spin']}>
             <Heading caps fit size={1} textColor="tertiary">JSX Spread Attributes</Heading>
             <Heading caps size={1} textColor="secondary">And</Heading>
             <Heading caps fit size={1} textColor="tertiary">Destructuring Arguments</Heading>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']}>
             <Layout>
               <Fit>
                 <CodePane
@@ -283,12 +433,12 @@ class Presentation extends React.Component {
                 <List margin="40px 20px" textColor="tertiary">
                   <Appear>
                     <ListItem textSize="0.9em">
-                      Used to forward props to underlying components
+                      Forward props to components
                     </ListItem>
                   </Appear>
                   <Appear>
                     <ListItem textSize="0.9em">
-                      Create a new props object without component-specific props
+                      New props object without component-specific props
                     </ListItem>
                   </Appear>
                 </List>
@@ -296,49 +446,73 @@ class Presentation extends React.Component {
             </Layout>
           </Slide>
 
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={require('raw!../assets/code/chuck4.example')}
+            />
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={require('raw!../assets/code/chuck5.example')}
+            />
+          </Slide>
+
           {/* Conditionnal rendering */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
+          <Slide transition={['slide', 'spin']}>
             <Heading caps fit size={1} textColor="secondary">Conditional</Heading>
             <Heading caps fit size={1} textColor="tertiary">rendering</Heading>
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
-            <Text caps bold textColor="secondary" textAlign="left">Problematics</Text>
+          <Slide transition={['slide']} align="center flex-start">
+            <Heading size={2} textColor="tertiary" >
+              {'<Chuck belgium />'}
+            </Heading>
+            <br />
+            <Chuck belgium />
           </Slide>
 
-          <Slide transition={['fade']} bgColor="primary">
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.3rem"
+              source={require('raw!../assets/code/conditional0.example')}
+            />
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="jsx"
+              textSize="1.3rem"
+              source={require('raw!../assets/code/conditional01.example')}
+            />
+          </Slide>
+
+          <Slide transition={['fade']}>
             <Text caps textColor="tertiary" textAlign="left">if</Text>
             <CodePane
               lang="jsx"
+              textSize="1.3rem"
               source={require('raw!../assets/code/conditional1.example')}
-              margin="10px"
             />
             <br />
             <Text caps textColor="tertiary" textAlign="left">unless</Text>
             <CodePane
               lang="jsx"
+              textSize="1.3rem"
               source={require('raw!../assets/code/conditional2.example')}
-              margin="10px"
             />
             <br />
             <Text caps textColor="tertiary" textAlign="left">if / else</Text>
             <CodePane
               lang="jsx"
+              textSize="1.3rem"
               source={require('raw!../assets/code/conditional3.example')}
-              margin="10px"
             />
-          </Slide>
-
-          {/* Events handling */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps fit size={1} textColor="secondary">Events</Heading>
-            <Heading caps fit size={1} textColor="tertiary">handling</Heading>
-          </Slide>
-
-          {/* Higher Order Component */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps fit size={1} textColor="secondary">Higher Order</Heading>
-            <Heading caps fit size={1} textColor="tertiary">Component</Heading>
           </Slide>
 
           {/* Communication patterns & tips */}
@@ -347,71 +521,174 @@ class Presentation extends React.Component {
             <Heading caps fit size={1} textColor="primary">patterns & tips</Heading>
           </Slide>
 
+
           {/* Flux */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
+          <Slide transition={['slide', 'spin']}>
             <Image src={images.flux.replace('/', '')} height="200px" />
             <Heading caps size={1} textColor="fluxColor">Flux</Heading>
           </Slide>
 
           {/* Flux-like libraries... */}
-          {/* Do you really need flux ? */}
+          <Slide transition={['slide']}>
+            <List textColor="tertiary">
+              <ListItem>Fluxible</ListItem>
+              <ListItem>Reflux</ListItem>
+              <ListItem>Alt</ListItem>
+              <ListItem>Flummox</ListItem>
+              <ListItem>McFly</ListItem>
+              <ListItem>Redux</ListItem>
+              <ListItem>Fluxxor</ListItem>
+              <ListItem>...</ListItem>
+            </List>
+          </Slide>
+
           {/* Communication patterns without flux */}
-          {/* I heard a lot about Redux */}
-          {/* Reactive & Observable patterns */}
-
-          {/* Styling patterns & tips */}
-          <Slide transition={['slide', 'spin']} bgColor="secondary">
-            <Heading caps fit size={1} textColor="tertiary">Styling</Heading>
-            <Heading caps fit size={1} textColor="primary">patterns & tips</Heading>
+          <Slide transition={['slide', 'spin']}>
+            <Heading caps fit size={1} textColor="secondary">No-flux</Heading>
+            <Heading caps fit size={1} textColor="tertiary">patterns</Heading>
           </Slide>
 
-          {/* React styling problematic */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps fit size={1} textColor="secondary">React styling</Heading>
-            <Heading caps fit size={1} textColor="tertiary">problematics</Heading>
+          <Slide transition={['fade']}>
+            <Image margin="20px" src={images.parentToChild.replace('/', '')} height="170px" />
+            <Appear><Image margin="20px" src={images.childToParent.replace('/', '')} height="170px" /></Appear>
+            <Appear><Image margin="20px" src={images.siblingToSibling.replace('/', '')} height="170px" /></Appear>
+            <Appear><Image margin="20px" src={images.anyToAny.replace('/', '')} height="170px" /></Appear>
           </Slide>
 
-          {/* CSS Tools & libraries */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps size={1} textColor="secondary">CSS</Heading>
-            <Heading caps fit size={1} textColor="tertiary">tools & libraries</Heading>
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Image src={images.parentToChild.replace('/', '')} height="100px" />
+            <Text bold textColor="secondary" textAlign="left">
+              Props !
+            </Text>
+            <List textColor="tertiary">
+              <ListItem>Send data from a parent to a child</ListItem>
+              <ListItem>Central feature of react</ListItem>
+            </List>
           </Slide>
 
-          {/* Performance tips & tricks */}
-          <Slide transition={['slide', 'spin']} bgColor="secondary">
-            <Heading caps fit size={1} textColor="tertiary">Performance</Heading>
-            <Heading caps fit size={1} textColor="primary">tips & tricks</Heading>
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Image src={images.parentToChild.replace('/', '')} height="100px" />
+            <Text bold textColor="secondary" textAlign="left">
+              Ref Functions
+            </Text>
+            <List textColor="tertiary">
+              <ListItem>Communicate with a child from a parent</ListItem>
+            </List>
+            <CodePane
+              lang="jsx"
+              source={require('raw!../assets/code/comm1.example')}
+            />
           </Slide>
 
-          {/* How does it work ? */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps fit size={1} textColor="secondary">Virtual DOM</Heading>
-            <Heading caps fit size={1} textColor="tertiary">how does it work ?</Heading>
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Image src={images.childToParent.replace('/', '')} height="100px" />
+            <Text bold textColor="secondary" textAlign="left">
+              Callbacks
+            </Text>
+            <List textColor="tertiary">
+              <ListItem>Pass a function to the child as a prop</ListItem>
+              <ListItem>Dont forget to declare propTypes</ListItem>
+            </List>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={'<MyChild myFunc={this.handleChildFunc.bind(this)} />'}
+            />
           </Slide>
 
-          {/* Debugging is a performance issue */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps fit size={1} textColor="secondary">Debugging</Heading>
-            <Heading caps fit size={1} textColor="tertiary">is a performance issue</Heading>
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Image src={images.childToParent.replace('/', '')} height="100px" />
+            <Text bold textColor="secondary" textAlign="left">
+              Event Bubbling
+            </Text>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={require('raw!../assets/code/comm2.example')}
+            />
           </Slide>
 
-          {/* How to analyze performances ? */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps fit size={1} textColor="secondary">How to analyze</Heading>
-            <Heading caps fit size={1} textColor="tertiary">performances ?</Heading>
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Image src={images.siblingToSibling.replace('/', '')} height="100px" />
+            <Text bold textColor="secondary" textAlign="left">
+              Parent Component
+            </Text>
+            <CodePane
+              lang="jsx"
+              textSize="0.9rem"
+              source={require('raw!../assets/code/comm3.example')}
+            />
           </Slide>
 
-          {/* Props equality optimizations */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps fit size={1} textColor="secondary">Props equality</Heading>
-            <Heading caps fit size={1} textColor="tertiary">optimizations</Heading>
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Image src={images.anyToAny.replace('/', '')} height="100px" />
+            <Text bold textColor="secondary" textAlign="left">
+              Pattern Provider
+            </Text>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={require('raw!../assets/code/provider1.example')}
+            />
           </Slide>
 
-          {/* Compiler optimizations */}
-          <Slide transition={['slide', 'spin']} bgColor="primary">
-            <Heading caps fit size={1} textColor="secondary">Compiler</Heading>
-            <Heading caps fit size={1} textColor="tertiary">Optimizations</Heading>
+          <Slide transition={['fade']} >
+            <Text bold textColor="secondary" textAlign="left">
+              Apply the provider on the highest tree level
+            </Text>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={require('raw!../assets/code/provider2.example')}
+            />
           </Slide>
+
+          <Slide transition={['fade']} >
+            <Text bold textColor="secondary" textAlign="left">
+              Build a HOC to apply the theme to your components
+            </Text>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={require('raw!../assets/code/provider3.example')}
+            />
+          </Slide>
+
+          <Slide transition={['fade']} >
+            <Text bold textColor="secondary" textAlign="left">
+              Apply it !
+            </Text>
+            <CodePane
+              lang="jsx"
+              textSize="1.1rem"
+              source={require('raw!../assets/code/provider4.example')}
+            />
+          </Slide>
+
+          {/* Conclusion */}
+          <Slide transition={['slide', 'spin']}>
+            <Heading caps fit size={1} textColor="secondary">Conclusion</Heading>
+            <Heading caps fit size={1} textColor="tertiary">and next...</Heading>
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <Text bold textColor="secondary" textAlign="left">
+              "Advanced React" Trilogy
+            </Text>
+            <List textColor="tertiary">
+              <ListItem>#1  Design Patterns & Tips</ListItem>
+              <ListItem>#2  Styling your React App</ListItem>
+              <ListItem>#3  React Performances</ListItem>
+            </List>
+          </Slide>
+
+          <Slide transition={['zoom']}>
+            <Image src={images.react.replace('/', '')} height="200px" />
+            <Heading size={1} fit caps textColor="tertiary">
+              Questions ?
+            </Heading>
+          </Slide>
+
         </Deck>
       </Spectacle>
   ) }

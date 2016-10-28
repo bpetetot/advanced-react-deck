@@ -1,0 +1,7 @@
+const MyStatelessComponent = ({ text, theme }) => (
+  <div style={{ color: theme.color }}>
+    {text}
+  </div>
+)
+
+export default themed(MyStatelessComponent)

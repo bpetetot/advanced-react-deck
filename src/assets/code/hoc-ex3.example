@@ -1,0 +1,9 @@
+// Relay
+const Container = Relay.createContainer(Component, {
+  fragments: {
+    user: () => Relay.QL`
+      fragment on User {
+        profilePhoto { uri }
+    }`
+  }
+})

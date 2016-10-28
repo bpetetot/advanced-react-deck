@@ -1,0 +1,19 @@
+const { compose, withState, withHandlers } = Recompose
+
+const enhance = compose(
+  withState('count', 'updateCount', 0),
+  withHandlers({
+    increment: props => () => props.updateCount(n => n + 1),
+    decrement: props => () => props.updateCount(n => n - 1)
+  })
+)
+
+const Counter = enhance(({ count, increment, decrement }) =>
+ <div>
+    <span>Count: {count}</span>
+    <div>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </div>
+  </div>
+)

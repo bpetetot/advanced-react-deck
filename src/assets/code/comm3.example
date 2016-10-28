@@ -1,0 +1,17 @@
+class ParentComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <SiblingA
+          myProp={this.state.propA}
+          myFunc={this.siblingAFunc.bind(this)}
+          />
+        <SiblingB
+          myProp={this.state.propB}
+          myFunc={this.siblingBFunc.bind(this)}
+          />
+      </div>
+    );
+  }
+  // Define 'siblingAFunc' and 'siblingBFunc' here
+}

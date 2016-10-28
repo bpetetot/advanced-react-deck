@@ -1,13 +1,11 @@
 import React from 'react'
 
-const ChuckFace = ({ url, ...rest }) => (
+import imgUrl from './assets/chuck.jpg'
+
+const ChuckFace = ({ ...rest }) => (
   <div {...rest}>
-    <img src={url} alt="chuck" />
+    <img src={imgUrl} alt="chuck" />
   </div>
 )
-
-ChuckFace.propTypes = {
-  url: React.PropTypes.node,
-}
 
 export default ChuckFace

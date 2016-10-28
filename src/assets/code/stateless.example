@@ -1,8 +1,8 @@
 const Fact = (props) => (
   <div className={props.className}>
-    {this.props.text}
+    {props.text}
   </div>
-);
+)
 
 Fact.propTypes = {
   text: React.PropTypes.string,

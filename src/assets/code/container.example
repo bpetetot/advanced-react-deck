@@ -1,18 +1,18 @@
 class FactContainer extends React.Component {
 
-  constructor() {
-    super();
-    this.state = { fact: "" }
+  constructor(props) {
+    super(props);
+    this.state = { fact: null }
   }
 
   componentDidMount() {
-    fetch('/facts.json')
-      .then(response => response.json())
-      .then(json => this.setState({ fact: json[0] }))
+    fetch(`/facts/${this.props.id}`)
+      .then(fact => this.setState({ fact }))
   }
 
   render() {
-    return <Fact text={this.state.fact} />;
+    const { fact } = this.state
+    return <Fact text={fact.text} />
   }
 
 }

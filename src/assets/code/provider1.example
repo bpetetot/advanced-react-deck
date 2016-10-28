@@ -1,0 +1,15 @@
+class ThemeProvider extends Component {
+
+  // getChildContext is called to pass the `context`
+  // here from the props
+  getChildContext() {
+    return {
+      theme: this.props.theme,
+    }
+  }
+
+  // children rendering
+  render() {
+    return Children.only(this.props.children)
+  }
+}

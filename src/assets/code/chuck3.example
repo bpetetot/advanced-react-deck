@@ -1,0 +1,30 @@
+export default class ChuckContainer extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = { facts: [], score: 0 }
+  }
+
+  componentDidMount() {
+    fetch('/facts').then(facts => {
+      const randomFact = facts[Math.floor(Math.random() * facts.length)]
+      const newFacts = [...this.state.facts, randomFact]
+      const newScore = this.state.score + Number(randomFact.points)
+      this.setState({ facts: newFacts, score: newScore })
+    })
+  }
+
+  updateFacts() { ... }
+  clearFacts() { this.setState({ facts: [], score: 0 }) }
+
+  render() {
+    return (
+      <Chuck
+        facts={this.state.facts}
+        score={this.state.score}
+        onAddFact={this.updateFacts.bind(this)}
+        onClearFacts={this.clearFacts.bind(this)}
+      />
+    )
+  }
+}

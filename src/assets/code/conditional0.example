@@ -1,7 +1,18 @@
-const Fact = ({text, chuck, name, ...rest}) => {
-  if (chuck) {
-    return <div {...rest}>{text}</div>;
-  } else {
-    return <div {...rest}>{text.replace('Chuck Norris', name)}</div>
+const Chuck = ({ facts, score, belgium, ...actions }) => {
+
+  let image = <ChuckImage onClick={actions.onAddFact} />
+  if (belgium) {
+    image = <JCVDImage onClick={actions.onAddFact} />
   }
+
+  return (
+    <div>
+      <div className="chuck-header">
+        <FactsStat title="Facts" count={facts.length} onClick={actions.onClearFacts} />
+        {image}
+        <FactsStat title="Score" count={score} />
+      </div>
+      {facts.map((f) => <Fact key={f.id} belgium={belgium} />)}
+    </div>
+  )
 }

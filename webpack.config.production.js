@@ -8,10 +8,13 @@ module.exports = {
     "babel-polyfill",
     "./src/index"
   ],
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
     path: path.join(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "/dist/"
+    publicPath: ".//dist/"
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

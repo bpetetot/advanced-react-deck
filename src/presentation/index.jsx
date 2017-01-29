@@ -24,6 +24,7 @@ import preloader from 'spectacle/lib/utils/preloader'
 import createTheme from './theme'
 
 import Chuck from '../chuckapp/ChuckContainer'
+import MotionExample from '../motion'
 
 // Require CSS
 require('normalize.css')
@@ -304,27 +305,62 @@ class Presentation extends React.Component {
             <Heading caps fit size={1} textColor="tertiary">Component</Heading>
           </Slide>
 
-          {/* TODO : ICI METTRE SLIDE PROg FONCTIONNELLE */}
+          <Slide transition={['fade']}>
+            <Text caps bold textColor="secondary" textAlign="left">Higher-Order Function</Text>
+            <Appear>
+              <CodePane
+                lang="js"
+                textSize="1.1rem"
+                source={'const add = (x, y) => x + y'}
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="js"
+                textSize="1.1rem"
+                source={
+`const log = func => (...args) => {
+  console.log(...args)
+  return func(...args)
+}`}
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="js"
+                textSize="1.1rem"
+                source={'const logAdd = log(add)'}
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="js"
+                textSize="1.1rem"
+                source={'logAdd(1, 2) // output : 1, 2'}
+              />
+            </Appear>
+          </Slide>
+
 
           <Slide transition={['fade']} align="flex-start flex-start">
             <Text caps bold textColor="secondary" textAlign="left">What is a HOC ?</Text>
             <Appear>
               <CodePane
-                lang="jsx"
+                lang="js"
                 textSize="1.8rem" margin="30px"
                 source={require('raw!../assets/code/hoc1.example')}
               />
             </Appear>
             <Appear>
               <CodePane
-                lang="jsx"
+                lang="js"
                 textSize="1.8rem" margin="30px"
                 source={require('raw!../assets/code/hoc2.example')}
               />
             </Appear>
             <Appear>
               <CodePane
-                lang="jsx"
+                lang="js"
                 textSize="1.8rem" margin="30px"
                 source={require('raw!../assets/code/hoc3.example')}
               />
@@ -411,14 +447,25 @@ class Presentation extends React.Component {
             />
           </Slide>
 
-          {/* TODO : ICI METTRE LA LIB RE-FETCH */}
           <Slide transition={['fade']}>
-            <BlockQuote>
-              <Quote textSize="1.5em" textColor="tertiary">
-                Higher-order components are parameterized container components.
-              </Quote>
-              <Cite textSize="1em" textColor="secondary">Andrew Clark (Facebook)</Cite>
-            </BlockQuote>
+            <Text caps bold textColor="secondary" textAlign="left">Compose All the Things</Text>
+            <Appear>
+              <CodePane
+                lang="js"
+                textSize="1.1rem"
+                source={
+`const add = (x, y) => x + y
+const square = x => x * x`
+                }
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="js"
+                textSize="1.1rem"
+                source={'const addAndSquare = (x, y) => square(add(x, y))'}
+              />
+            </Appear>
           </Slide>
 
           <Slide transition={['fade']}>
@@ -443,15 +490,52 @@ class Presentation extends React.Component {
             />
           </Slide>
 
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              textSize="1.1rem"
-              source={require('raw!../assets/code/recompose2.example')}
-            />
+          {/* Function As Child pattern */}
+          <Slide transition={['slide', 'spin']}>
+            <Heading caps fit size={1} textColor="secondary">Function</Heading>
+            <Heading caps fit size={1} textColor="tertiary">As Child</Heading>
           </Slide>
 
-          {/* TODO : ICI METTRE L'AUTRE PATTERN HOC */}
+          <Slide transition={['fade']}>
+            <CodePane
+              lang="js"
+              textSize="1.3rem"
+              source={
+`const Name = ({ children }) => children('World')
+
+Name.propTypes = {
+  children: React.PropTypes.func.isRequired,
+}`
+              }
+            />
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.3rem"
+                source={`
+<Name>
+  {name => <div>Hello, {name}!</div>}
+</Name>
+                  `}
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.3rem"
+                source={`<div>Hello, World!</div>`}
+              />
+            </Appear>
+          </Slide>
+
+          <Slide transition={['fade']}>
+            <MotionExample />
+            <CodePane
+              lang="jsx"
+              source={require('raw!../assets/code/motion.example')}
+              textSize="1.3rem"
+            />
+          </Slide>
 
           <Slide transition={['slide', 'spin']}>
             <Heading caps size={1} textColor="secondary">~ TIPS ~</Heading>
@@ -460,6 +544,7 @@ class Presentation extends React.Component {
             <Heading caps fit size={1} textColor="tertiary">Destructuring Arguments</Heading>
           </Slide>
 
+          {/* Spread attributes */}
           <Slide transition={['fade']}>
             <Layout>
               <Fit>
@@ -502,7 +587,6 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* Conditionnal rendering */}
-          {/* TODO : Voir comment développer */}
           <Slide transition={['slide', 'spin']}>
             <Heading caps size={1} textColor="secondary">~ TIPS ~</Heading>
             <Heading caps size={1} textColor="tertiary">Conditional</Heading>
@@ -562,6 +646,31 @@ class Presentation extends React.Component {
               { loc: [7, 12] },
             ]}
           />
+
+          <CodeSlide
+            transition={['fade']}
+            lang="jsx"
+            textSize="20px"
+            code={require('raw!../assets/code/conditional-jsx.example')}
+            ranges={[
+              { loc: [0, 1] },
+              { loc: [2, 5] },
+              { loc: [6, 19] },
+              { loc: [20, 23] },
+            ]}
+          />
+
+          <Slide transition={['fade']}>
+            <Text caps textColor="secondary" textAlign="left">jsx-control-statements</Text>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.3rem"
+                source={require('raw!../assets/code/conditional-jsx.example')}
+              />
+            </Appear>
+          </Slide>
+
 
           {/* Communication patterns & tips */}
           <Slide transition={['slide', 'spin']} bgColor="secondary">
@@ -623,12 +732,63 @@ class Presentation extends React.Component {
               <ListItem>Pass a function to the child as a prop</ListItem>
               <ListItem>Dont forget to declare propTypes</ListItem>
             </List>
-            {/* TODO expliquer les probleme de perf du binding */}
             <CodePane
               lang="jsx"
               textSize="1.1rem"
               source={'<MyChild myFunc={this.handleChildFunc.bind(this)} />'}
             />
+          </Slide>
+
+          <Slide transition={['fade']} align="flex-start flex-start">
+            <Text bold textColor="secondary" textAlign="left">
+              Tips : React Binding Patterns
+            </Text>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.2rem"
+                source={
+`// Bind in render
+<MyChild myFunc={this.handleChildFunc.bind(this)} />`
+                }
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.2rem"
+                source={
+`// Arrow function in render
+<MyChild myFunc={e => this.handleChildFunc(e)} />`
+                }
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.2rem"
+                source={
+`// Bind in constructor
+constructor(props) {
+  super(props);
+  this.handleChildFunc = this.handleChildFunc.bind(this);
+}`
+                }
+              />
+            </Appear>
+            <Appear>
+              <CodePane
+                lang="jsx"
+                textSize="1.2rem"
+                source={
+`// Use Arrow Function in Class Property
+handleChildFunc = () => {
+  // call this function from render
+  // and this.whatever in here works fine.
+};`
+                }
+              />
+            </Appear>
           </Slide>
 
           <Slide transition={['fade']} align="flex-start flex-start">
@@ -638,7 +798,7 @@ class Presentation extends React.Component {
             </Text>
             <CodePane
               lang="jsx"
-              textSize="0.9rem"
+              textSize="1rem"
               source={require('raw!../assets/code/comm3.example')}
             />
           </Slide>

@@ -1,19 +1,15 @@
-const { compose, withState, withHandlers } = Recompose
+const BaseComponent = props => {...}
 
+// This will work, but it's tedious
+let EnhancedComponent = pure(BaseComponent)
+EnhancedComponent = mapProps(/*...args*/)(EnhancedComponent)
+EnhancedComponent = withState(/*...args*/)(EnhancedComponent)
+
+// Do this instead
 const enhance = compose(
-  withState('count', 'updateCount', 0),
-  withHandlers({
-    increment: props => () => props.updateCount(n => n + 1),
-    decrement: props => () => props.updateCount(n => n - 1)
-  })
+  withState(/*...args*/),
+  mapProps(/*...args*/),
+  pure
 )
 
-const Counter = enhance(({ count, increment, decrement }) =>
- <div>
-    <span>Count: {count}</span>
-    <div>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
-    </div>
-  </div>
-)
+const EnhancedComponent = enhance(BaseComponent)

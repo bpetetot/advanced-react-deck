@@ -1,0 +1,12 @@
+const MotionExample = () =>
+  <Motion
+    defaultStyle={{ x: 0 }}
+    style={{ x: spring(100, { stiffness: 100, damping: 1 }) }}
+  >
+    {
+      (value) =>
+      <div style={{ width: `${value.x}%`, backgroundColor: '#FFF' }}>
+        react-motion
+      </div>
+    }
+  </Motion>

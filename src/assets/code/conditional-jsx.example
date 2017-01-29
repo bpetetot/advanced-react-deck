@@ -1,0 +1,23 @@
+// jsx-control-statement (Babel plugin)
+
+<If condition={ test }>
+  <span>Truth</span>
+</If>
+
+<Choose>
+  <When condition={ test1 }>
+    <span>IfBlock</span>
+  </When>
+  <When condition={ test2 }>
+    <span>ElseIfBlock</span>
+    <span>Another ElseIfBlock</span>
+    <span>...</span>
+  </When>
+  <Otherwise>
+    <span>ElseBlock</span>
+  </Otherwise>
+</Choose>
+
+<For each="item" index="index" of={ items )}>
+  <span key={ item.id }>{ index }. { item.title }</span>
+</For>

@@ -650,7 +650,7 @@ Name.propTypes = {
           <CodeSlide
             transition={['fade']}
             lang="jsx"
-            textSize="20px"
+            textSize="26px"
             code={require('raw!../assets/code/conditional-jsx.example')}
             ranges={[
               { loc: [0, 1] },

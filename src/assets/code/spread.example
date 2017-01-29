@@ -13,7 +13,7 @@ const Fact = ({text, className}) => (
   </div>
 );
 
-// With JSX Spread attributes
+// Avoid rest argument
 const Fact = ({text, ...rest}) => (
   <div {...rest}>
     {text}

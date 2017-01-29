@@ -1,13 +1,19 @@
-const Chuck = ({ facts, score, belgium, ...actions }) => (
+const Chuck = ({ facts, score, belgium, onAddFact, onClearFacts }) => (
   <div>
-    <div className="chuck-header">
-      <FactsStat title="Facts" count={facts.length} onClick={actions.onClearFacts} />
-      {(belgium) 
-        ? <JCVDImage onClick={actions.onAddFact} />
-        : <ChuckImage onClick={actions.onAddFact} />
-      }
-      <FactsStat title="Score" count={score} />
-    </div>
-    {facts.map((f) => <Fact key={f.id} belgium={belgium} />)}
+    <FactsStat
+      title="Facts"
+      count={facts.length}
+      onClick={onClearFacts}
+    />
+    {
+      belgium
+      ? <JCVDImage onClick={onAddFact} />
+      : <ChuckImage onClick={onAddFact} />
+    }
+    <FactsStat
+      title="Score"
+      count={score}
+    />
+    {facts.map((f) => <Fact key={f.id} />)}
   </div>
 )

@@ -1,6 +1,6 @@
-const Fact = (props) => (
-  <div className={props.className}>
-    {props.text}
+const Fact = ({ text, className }) => (
+  <div className={className}>
+    {text}
   </div>
 )
 

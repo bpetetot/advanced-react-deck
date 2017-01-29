@@ -154,17 +154,18 @@ class Presentation extends React.Component {
                     <ListItem padding="10px" textSize="0.9em">DefaultProps & PropTypes</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem padding="10px" textSize="0.9em">Pure function</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Easy to test</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem padding="10px" textSize="0.9em">Easy to test</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Tips : Use destructuring</ListItem>
+                  </Appear>
+                  <Appear>
+                    <ListItem padding="10px" textSize="0.9em">Pure function</ListItem>
                   </Appear>
                 </List>
               </Fill>
             </Layout>
           </Slide>
-
-          {/* TODO : ICI METTRE LE DESTRUCTURING */}
 
           <CodeSlide
             transition={['fade']}
@@ -452,10 +453,10 @@ class Presentation extends React.Component {
 
           {/* TODO : ICI METTRE L'AUTRE PATTERN HOC */}
 
-          {/* TODO SUPPRIMER / DEPLACET JSX spread attributes & Destructuring arguments */}
           <Slide transition={['slide', 'spin']}>
+            <Heading caps size={1} textColor="secondary">~ TIPS ~</Heading>
             <Heading caps fit size={1} textColor="tertiary">JSX Spread Attributes</Heading>
-            <Heading caps size={1} textColor="secondary">And</Heading>
+            <Heading caps size={1} textColor="secondary"> AND </Heading>
             <Heading caps fit size={1} textColor="tertiary">Destructuring Arguments</Heading>
           </Slide>
 
@@ -487,7 +488,12 @@ class Presentation extends React.Component {
                   </Appear>
                   <Appear>
                     <ListItem textSize="0.9em">
-                      New props object without component-specific props
+                      Useful with HOCs
+                    </ListItem>
+                  </Appear>
+                  <Appear>
+                    <ListItem textSize="0.9em">
+                      Avoid '...rest' argument
                     </ListItem>
                   </Appear>
                 </List>
@@ -495,27 +501,12 @@ class Presentation extends React.Component {
             </Layout>
           </Slide>
 
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              textSize="1.1rem"
-              source={require('raw!../assets/code/chuck4.example')}
-            />
-          </Slide>
-
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              textSize="1.1rem"
-              source={require('raw!../assets/code/chuck5.example')}
-            />
-          </Slide>
-
           {/* Conditionnal rendering */}
           {/* TODO : Voir comment développer */}
           <Slide transition={['slide', 'spin']}>
-            <Heading caps fit size={1} textColor="secondary">Conditional</Heading>
-            <Heading caps fit size={1} textColor="tertiary">rendering</Heading>
+            <Heading caps size={1} textColor="secondary">~ TIPS ~</Heading>
+            <Heading caps size={1} textColor="tertiary">Conditional</Heading>
+            <Heading caps size={1} textColor="secondary">rendering</Heading>
           </Slide>
 
           <Slide transition={['slide']} align="center flex-start">
@@ -526,21 +517,18 @@ class Presentation extends React.Component {
             <Chuck belgium />
           </Slide>
 
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              textSize="1.3rem"
-              source={require('raw!../assets/code/conditional0.example')}
-            />
-          </Slide>
-
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              textSize="1.3rem"
-              source={require('raw!../assets/code/conditional01.example')}
-            />
-          </Slide>
+          <CodeSlide
+            transition={['fade']}
+            lang="jsx"
+            textSize="20px"
+            code={require('raw!../assets/code/conditional0.example')}
+            ranges={[
+              { loc: [0, 21] },
+              { loc: [2, 6] },
+              { loc: [14, 15] },
+              { loc: [2, 21] },
+            ]}
+          />
 
           <Slide transition={['fade']}>
             <Text caps textColor="tertiary" textAlign="left">if</Text>
@@ -564,6 +552,16 @@ class Presentation extends React.Component {
               source={require('raw!../assets/code/conditional3.example')}
             />
           </Slide>
+
+          <CodeSlide
+            transition={['fade']}
+            lang="jsx"
+            textSize="20px"
+            code={require('raw!../assets/code/conditional01.example')}
+            ranges={[
+              { loc: [7, 12] },
+            ]}
+          />
 
           {/* Communication patterns & tips */}
           <Slide transition={['slide', 'spin']} bgColor="secondary">
@@ -625,6 +623,7 @@ class Presentation extends React.Component {
               <ListItem>Pass a function to the child as a prop</ListItem>
               <ListItem>Dont forget to declare propTypes</ListItem>
             </List>
+            {/* TODO expliquer les probleme de perf du binding */}
             <CodePane
               lang="jsx"
               textSize="1.1rem"

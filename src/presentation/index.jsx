@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react'
+import CodeSlide from 'spectacle-code-slide'
 
 import {
   Appear,
@@ -83,12 +84,22 @@ class Presentation extends React.Component {
             <Chuck />
           </Slide>
 
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              source={require('raw!../assets/code/chuck.example')}
-            />
-          </Slide>
+          <CodeSlide
+            transition={['fade']}
+            lang="jsx"
+            textSize="20px"
+            code={require('raw!../assets/code/chuck.example')}
+            ranges={[
+              { loc: [0, 1] },
+              { loc: [2, 6] },
+              { loc: [7, 15] },
+              { loc: [19, 39] },
+              { loc: [23, 28] },
+              { loc: [28, 29] },
+              { loc: [29, 33] },
+              { loc: [33, 34] },
+            ]}
+          />
 
           {/* Components patterns & tips */}
           <Slide transition={['slide', 'spin']} bgColor="secondary">
@@ -153,6 +164,22 @@ class Presentation extends React.Component {
             </Layout>
           </Slide>
 
+          {/* TODO : ICI METTRE LE DESTRUCTURING */}
+
+          <CodeSlide
+            transition={['fade']}
+            lang="jsx"
+            textSize="20px"
+            code={require('raw!../assets/code/chuck2.example')}
+            ranges={[
+              { loc: [0, 15] },
+              { loc: [0, 1] },
+              { loc: [1, 14] },
+              { loc: [16, 20] },
+              { loc: [21, 27] },
+            ]}
+          />
+
           <Slide transition={['fade']}>
             <BlockQuote>
               <Quote>
@@ -161,14 +188,6 @@ class Presentation extends React.Component {
               </Quote>
               <Cite>React documentation</Cite>
             </BlockQuote>
-          </Slide>
-
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              textSize="1rem"
-              source={require('raw!../assets/code/chuck2.example')}
-            />
           </Slide>
 
           {/* Container component */}
@@ -225,6 +244,20 @@ class Presentation extends React.Component {
             </Layout>
           </Slide>
 
+          <CodeSlide
+            transition={['fade']}
+            lang="jsx"
+            textSize="20px"
+            code={require('raw!../assets/code/chuck3.example')}
+            ranges={[
+              { loc: [0, 1] },
+              { loc: [2, 6] },
+              { loc: [7, 15] },
+              { loc: [16, 20] },
+              { loc: [21, 31] },
+            ]}
+          />
+
           <Slide transition={['fade']}>
             <BlockQuote>
               <Quote textSize="1.5em" textColor="tertiary">
@@ -233,13 +266,6 @@ class Presentation extends React.Component {
               </Quote>
               <Cite textSize="1em" textColor="secondary">Jason Bonta (Facebook)</Cite>
             </BlockQuote>
-          </Slide>
-
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              source={require('raw!../assets/code/chuck3.example')}
-            />
           </Slide>
 
           {/* Presentational vs. Container */}
@@ -276,6 +302,8 @@ class Presentation extends React.Component {
             <Heading caps fit size={1} textColor="secondary">Higher-Order</Heading>
             <Heading caps fit size={1} textColor="tertiary">Component</Heading>
           </Slide>
+
+          {/* TODO : ICI METTRE SLIDE PROg FONCTIONNELLE */}
 
           <Slide transition={['fade']} align="flex-start flex-start">
             <Text caps bold textColor="secondary" textAlign="left">What is a HOC ?</Text>
@@ -340,21 +368,39 @@ class Presentation extends React.Component {
             </Appear>
           </Slide>
 
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              textSize="1.2rem"
-              source={require('raw!../assets/code/hoc-ex4.example')}
-            />
-          </Slide>
+          <CodeSlide
+            transition={['fade']}
+            lang="jsx"
+            textSize="22px"
+            code={require('raw!../assets/code/hoc-ex4.example')}
+            ranges={[
+              { loc: [0, 18] },
+              { loc: [0, 1] },
+              { loc: [1, 18] },
+              { loc: [1, 2] },
+              { loc: [3, 7] },
+              { loc: [8, 12] },
+              { loc: [13, 17] },
+              { loc: [19, 20] },
+            ]}
+          />
 
-          <Slide transition={['fade']}>
-            <CodePane
-              lang="jsx"
-              textSize="1.2rem"
-              source={require('raw!../assets/code/hoc-ex5.example')}
-            />
-          </Slide>
+          <CodeSlide
+            transition={['fade']}
+            lang="jsx"
+            textSize="20px"
+            code={require('raw!../assets/code/hoc-ex5.example')}
+            ranges={[
+              { loc: [0, 18] },
+              { loc: [0, 1] },
+              { loc: [1, 18] },
+              { loc: [1, 2] },
+              { loc: [3, 7] },
+              { loc: [8, 12] },
+              { loc: [13, 17] },
+              { loc: [19, 21] },
+            ]}
+          />
 
           <Slide transition={['fade']}>
             <CodePane
@@ -364,6 +410,7 @@ class Presentation extends React.Component {
             />
           </Slide>
 
+          {/* TODO : ICI METTRE LA LIB RE-FETCH */}
           <Slide transition={['fade']}>
             <BlockQuote>
               <Quote textSize="1.5em" textColor="tertiary">
@@ -403,7 +450,9 @@ class Presentation extends React.Component {
             />
           </Slide>
 
-          {/* JSX spread attributes & Destructuring arguments */}
+          {/* TODO : ICI METTRE L'AUTRE PATTERN HOC */}
+
+          {/* TODO SUPPRIMER / DEPLACET JSX spread attributes & Destructuring arguments */}
           <Slide transition={['slide', 'spin']}>
             <Heading caps fit size={1} textColor="tertiary">JSX Spread Attributes</Heading>
             <Heading caps size={1} textColor="secondary">And</Heading>
@@ -463,6 +512,7 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* Conditionnal rendering */}
+          {/* TODO : Voir comment développer */}
           <Slide transition={['slide', 'spin']}>
             <Heading caps fit size={1} textColor="secondary">Conditional</Heading>
             <Heading caps fit size={1} textColor="tertiary">rendering</Heading>
@@ -567,20 +617,6 @@ class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={['fade']} align="flex-start flex-start">
-            <Image src={images.parentToChild.replace('/', '')} height="100px" />
-            <Text bold textColor="secondary" textAlign="left">
-              Ref Functions
-            </Text>
-            <List textColor="tertiary">
-              <ListItem>Communicate with a child from a parent</ListItem>
-            </List>
-            <CodePane
-              lang="jsx"
-              source={require('raw!../assets/code/comm1.example')}
-            />
-          </Slide>
-
-          <Slide transition={['fade']} align="flex-start flex-start">
             <Image src={images.childToParent.replace('/', '')} height="100px" />
             <Text bold textColor="secondary" textAlign="left">
               Callbacks
@@ -593,18 +629,6 @@ class Presentation extends React.Component {
               lang="jsx"
               textSize="1.1rem"
               source={'<MyChild myFunc={this.handleChildFunc.bind(this)} />'}
-            />
-          </Slide>
-
-          <Slide transition={['fade']} align="flex-start flex-start">
-            <Image src={images.childToParent.replace('/', '')} height="100px" />
-            <Text bold textColor="secondary" textAlign="left">
-              Event Bubbling
-            </Text>
-            <CodePane
-              lang="jsx"
-              textSize="1.1rem"
-              source={require('raw!../assets/code/comm2.example')}
             />
           </Slide>
 

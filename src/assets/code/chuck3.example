@@ -1,4 +1,4 @@
-export default class ChuckContainer extends Component {
+class ChuckContainer extends Component {
 
   constructor(props) {
     super(props)
@@ -14,16 +14,18 @@ export default class ChuckContainer extends Component {
     })
   }
 
-  updateFacts() { ... }
-  clearFacts() { this.setState({ facts: [], score: 0 }) }
+  updateFacts = () => { ... }
+  clearFacts = () => {
+    this.setState({ facts: [], score: 0 })
+  }
 
   render() {
     return (
       <Chuck
         facts={this.state.facts}
         score={this.state.score}
-        onAddFact={this.updateFacts.bind(this)}
-        onClearFacts={this.clearFacts.bind(this)}
+        onAddFact={this.updateFacts}
+        onClearFacts={this.clearFacts}
       />
     )
   }

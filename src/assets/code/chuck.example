@@ -1,4 +1,4 @@
-export default class Chuck extends Component {
+class Chuck extends Component {
 
   constructor(props) {
     super(props)
@@ -6,7 +6,7 @@ export default class Chuck extends Component {
   }
 
   componentDidMount() {
-    fetch('/facts').then(facts => {
+    fetch('/facts').then((facts) => {
       const randomFact = facts[Math.floor(Math.random() * facts.length)]
       const newFacts = [...this.state.facts, randomFact]
       const newScore = this.state.score + Number(randomFact.points)
@@ -14,19 +14,24 @@ export default class Chuck extends Component {
     })
   }
 
-  updateFacts() { ... }
-  clearFacts() { ... }
+  updateFacts = () => { ... }
+  clearFacts = () => { ... }
 
   render() {
     const { facts, score } = this.state
     return (
       <div>
-        <div className="chuck-header">
-          <FactsStat title="Facts" count={facts.length} onClick={this.clearFacts.bind(this)} />
-          <ChuckImage onClick={this.updateFacts.bind(this)} />
-          <FactsStat title="Score" count={score} />
-        </div>
-        {facts.map((f) => <Fact key={f.id} text={f.fact} />)}
+        <FactsStat
+          title="Facts"
+          count={facts.length}
+          onClick={this.clearFacts}
+        />
+        <ChuckImage onClick={this.updateFacts} />
+        <FactsStat
+          title="Score"
+          count={score}
+        />
+        { facts.map(f => <Fact key={f.id} text={f.fact} />) }
       </div>
     )
   }

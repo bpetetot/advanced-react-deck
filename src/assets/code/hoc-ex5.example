@@ -1,7 +1,10 @@
 const fetchResource = get => WrappedComponent =>
   class extends React.Component {
 
-    state = { resource: null }
+    constructor(props) {
+      super(props)
+      this.state = { resource: null }
+    }
 
     componentDidMount() {
       get(this.props)

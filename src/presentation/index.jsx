@@ -229,7 +229,7 @@ class Presentation extends React.Component {
                     <ListItem padding="10px" textSize="0.9em">No this, state or refs</ListItem>
                   </Appear>
                   <Appear>
-                    <ListItem padding="10px" textSize="0.9em">DefaultProps & PropTypes</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">defaultProps & propTypes</ListItem>
                   </Appear>
                   <Appear>
                     <ListItem padding="10px" textSize="0.9em">Easy to test</ListItem>
@@ -395,7 +395,7 @@ class Presentation extends React.Component {
             }
           >
             <Heading caps fit size={1} textColor="tertiary">Presentational component</Heading>
-            <Heading caps size={2} textColor="secondary">vs</Heading>
+            <Heading caps size={2} textColor="secondary">and</Heading>
             <Heading caps fit size={1} textColor="tertiary">Container component</Heading>
           </Slide>
 
@@ -414,7 +414,7 @@ class Presentation extends React.Component {
             }
           >
             <Text caps bold textColor="secondary" textAlign="left">
-              Presentational vs. Container
+              Presentational and Container
             </Text>
             <List textColor="tertiary">
               <Appear><ListItem>Better separation of concerns</ListItem></Appear>
@@ -925,7 +925,7 @@ Name.propTypes = {
             </Text>
             <List textColor="tertiary">
               <ListItem>Pass a function to the child as a prop</ListItem>
-              <ListItem>Dont forget to declare propTypes</ListItem>
+              <ListItem>Don't forget to declare propTypes</ListItem>
             </List>
             <CodePane
               lang="jsx"

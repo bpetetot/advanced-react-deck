@@ -51,7 +51,7 @@ class Presentation extends React.Component {
   render() {
     return (
       <Spectacle theme={theme}>
-        <Deck transition={['zoom', 'slide']} progress="bar" transitionDuration={500}>
+        <Deck transition={['zoom', 'slide']} controls={false} progress="bar" transitionDuration={500}>
 
           {/* Cover */}
           <Slide transition={['zoom']}>
@@ -65,7 +65,18 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* Me */}
-          <Slide transition={['slide']} bgImage={images.nantes.replace('/', '')} bgDarken={0.75}>
+          <Slide
+            transition={['slide']} bgImage={images.nantes.replace('/', '')} bgDarken={0.75}
+            notes={
+              <div>
+                <b>8 mois zenika nantes -- fullstack javascript -- Formateur React</b><br />
+                Les incontournables <b>getting started & hello world</b><br />
+                <b>Composants :</b> réutilisable, maintenable, factoriser...<br />
+                <b>Aller plus loin :</b> composants purs, stateless, stateful, de présentation, les container component, HoC, classe et stateless function et tout ce qui est communication patterns<br />
+                <u>Cadrer ces <b>concepts</b></u> et d’en faire <b>émerger des patterns</b>
+              </div>
+            }
+          >
             <Image src={images.avatar.replace('/', '')} height="200px" />
             <Heading size={2} caps textColor="secondary" >
               Benjamin Petetot
@@ -77,7 +88,17 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* ChuckNorris */}
-          <Slide transition={['slide']} align="center flex-start">
+          <Slide
+            transition={['slide']} align="center flex-start"
+            notes={
+              <div>
+                <b>Mon accolyte de la soirée</b><br />
+                <b>Composant Chuck</b><br />
+                <b>Utilisé comme exemple</b><br />
+                <b>Appliquer certains patterns</b>
+              </div>
+            }
+          >
             <Heading size={2} textColor="tertiary" >
               {'<Chuck />'}
             </Heading>
@@ -100,33 +121,86 @@ class Presentation extends React.Component {
               { loc: [29, 33] },
               { loc: [33, 34] },
             ]}
+            notes={
+              <div>
+                <b>Après mon getting started,</b> voilà comment j'aurais sûrement coder...<br />
+                <b>Normal</b> et <b>Fonctionne bien</b><br />
+                <b>Tous les exemples ES2016 & JSX</b><br />
+                <b>Présenter le code</b><br />
+                <b>PB:</b> mélange logique & présentation, non réutilisable...<br />
+                Comment rendre ce composant réutilisable ?
+              </div>
+            }
           />
 
           {/* Components patterns & tips */}
-          <Slide transition={['slide', 'spin']} bgColor="secondary">
+          <Slide
+            transition={['slide', 'spin']} bgColor="secondary"
+            notes={
+              <div>
+                Nous allons voir maintenant quelques <b>pattern autour des composants...</b><br />
+                <b>Meilleur séparation logique / présentation</b><br />
+                <b>Réutilisabilité / Maintenance</b><br />
+                <b>Testing</b><br />
+              </div>
+            }
+          >
             <Heading caps fit size={1} textColor="tertiary">component</Heading>
             <Heading caps fit size={1} textColor="primary">patterns & tips</Heading>
           </Slide>
 
           {/* Presentational component */}
-          <Slide transition={['slide', 'spin']}>
+          <Slide
+            transition={['slide', 'spin']}
+            notes={
+              <div>
+                <b>Presentational ou Dumb component</b>
+              </div>
+            }
+          >
             <Heading caps fit size={1} textColor="secondary">Presentational</Heading>
             <Heading caps fit size={1} textColor="tertiary">Component</Heading>
           </Slide>
 
-          <Slide transition={['fade']} notes="Examples : Page, Sidebar, Story, UserInfo, List">
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                1. Uniquement <b>l’affichage et le rendu de nos composants</b>  ----
+                balise <b>DOM & Style</b> ---- Peut contenir d’autre <b>presentational et des containers component</b><br />
+                2. <b>Pas de manip données</b> / pas de logique métier (récup donnée / HTTP)<br />
+                3. <b>Aucune dépendance</b> telles que les actions flux ou les stores<br />
+                4. Données et des callbacks exclusivement <b>via leur props</b><br />
+                5. Possédent <b>rarement un état interne</b> (uniquement manip UI)<br />
+                6. Codés sous forme de <b>composants fonctionnels</b> (sauf si etat interne, hook cycle de vie -- ex: perf)
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">Presentational component</Text>
             <List textColor="tertiary">
               <ListItem><b>How things look</b></ListItem>
-              <Appear><ListItem>No dependencies</ListItem></Appear>
               <Appear><ListItem>Don’t specify how the data is mutated</ListItem></Appear>
+              <Appear><ListItem>No dependencies</ListItem></Appear>
               <Appear><ListItem>Data and callbacks via props</ListItem></Appear>
               <Appear><ListItem>Rarely stateful</ListItem></Appear>
               <Appear><ListItem>Usually stateless functions</ListItem></Appear>
             </List>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                Une fonction : <b>syntaxe plus simple</b> ---- <b>entrée :</b> props, <b>sortie:</b> rendu du composant<br />
+                Agissent <b>comme les classes React</b> avec uniquement une méthode render de définie<br />
+                <b>but:</b> création de composants <b>le plus simples possible</b> (éviter lourdeur écriture classes)<br />
+                Optimisations de <b>performances dans le futur</b>, pour le moment, moins performant<br />
+                <b>Fonction Pure :</b> quand il n'y a <b>pas d'effets de bords</b>, ce qui signifie que la fonction ne change rien qui n'est pas local à la fonction elle-même.<br />
+                <b>Fonction Impure :</b> fonction qui modifie l'état de l'app, variable scope plus haut, touche entité externe (DOM) ----
+                Plus difficile à débugger & tester (car appliqué plusieurs, pas le même résultat)
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">Presentational component</Text>
             <Text textColor="tertiary" textAlign="left" margin="0 0 20px">
               with stateless function
@@ -146,6 +220,9 @@ class Presentation extends React.Component {
                     <ListItem padding="10px" textSize="0.9em">Props & Context</ListItem>
                   </Appear>
                   <Appear>
+                    <ListItem padding="10px" textSize="0.9em">Tips : Use destructuring</ListItem>
+                  </Appear>
+                  <Appear>
                     <ListItem padding="10px" textSize="0.9em">No lifecycle methods</ListItem>
                   </Appear>
                   <Appear>
@@ -156,9 +233,6 @@ class Presentation extends React.Component {
                   </Appear>
                   <Appear>
                     <ListItem padding="10px" textSize="0.9em">Easy to test</ListItem>
-                  </Appear>
-                  <Appear>
-                    <ListItem padding="10px" textSize="0.9em">Tips : Use destructuring</ListItem>
                   </Appear>
                   <Appear>
                     <ListItem padding="10px" textSize="0.9em">Pure function</ListItem>
@@ -193,12 +267,30 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* Container component */}
-          <Slide transition={['slide', 'spin']}>
+          <Slide
+            transition={['slide', 'spin']}
+            notes={
+              <div>
+                Maintenant qu'on a isoler la partie lié uniquement à l'UI de notre composant, comment gérer ça logique...
+              </div>
+            }
+          >
             <Heading caps fit size={1} textColor="secondary">Container</Heading>
             <Heading caps fit size={1} textColor="tertiary">Component</Heading>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                1. Gère la <b>logique des presentational components</b> ---- Pas de DOM (except wrapper), aucun style ---- Peut contenir d’autre presentational et des containers component<br />
+                2. <b>Fournissent les données</b> et <b>définissent le comportement</b> aux presentational ou autre composants<br />
+                3. Ex: <b>actions Flux</b> et les fournissent en tant que callback aux presentational components<br />
+                4. <b>Stateful</b> : source de données de nos composants<br />
+                5. <b>Générés à partir de higher order components</b><br /> ex: createContainer() de Relay, connect() de react-redux
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">Container component</Text>
             <List textColor="tertiary">
               <ListItem><b>How things work</b></ListItem>
@@ -220,7 +312,18 @@ class Presentation extends React.Component {
             </List>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                1. Gère la <b>logique des presentational components</b> ---- Pas de DOM (except wrapper), aucun style ---- Peut contenir d’autre presentational et des containers component<br />
+                2. <b>Fournissent les données</b> et <b>définissent le comportement</b> aux presentational ou autre composants<br />
+                3. Ex: <b>actions Flux</b> et les fournissent en tant que callback aux presentational components<br />
+                4. <b>Stateful</b> : source de données de nos composants<br />
+                5. <b>Générés à partir de higher order components</b><br /> ex: createContainer() de Relay, connect() de react-redux
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">Container component</Text>
             <Layout>
               <Fit>
@@ -233,7 +336,7 @@ class Presentation extends React.Component {
               <Fill>
                 <List margin="20px" textColor="tertiary">
                   <Appear>
-                    <ListItem padding="10px" textSize="0.9em">Stateful and/or stateless</ListItem>
+                    <ListItem padding="10px" textSize="0.9em">Stateful or stateless</ListItem>
                   </Appear>
                   <Appear>
                     <ListItem padding="10px" textSize="0.9em">Separate data-fetching and rendering</ListItem>
@@ -258,9 +361,21 @@ class Presentation extends React.Component {
               { loc: [16, 20] },
               { loc: [21, 31] },
             ]}
+            notes={
+              <div>
+                <b>PB :</b> dépendance entre le FactContainer et le Fact (Container et Presentational)
+              </div>
+            }
           />
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                Un peu trop limitant, mais ce qu'il faut noter c'est qu'il n'a rien à faire du rendu
+              </div>
+            }
+          >
             <BlockQuote>
               <Quote textSize="1.5em" textColor="tertiary">
                 A container does data fetching and then renders its corresponding sub-component.
@@ -271,13 +386,33 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* Presentational vs. Container */}
-          <Slide transition={['slide', 'spin']}>
+          <Slide
+            transition={['slide', 'spin']}
+            notes={
+              <div>
+                Donc maintenant, faisons un point sur ces 2 patterns...
+              </div>
+            }
+          >
             <Heading caps fit size={1} textColor="tertiary">Presentational component</Heading>
             <Heading caps size={2} textColor="secondary">vs</Heading>
             <Heading caps fit size={1} textColor="tertiary">Container component</Heading>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                <b>meilleure séparation des responsabilités</b><br />
+                une meilleure compréhension de la logique de ton application et ton interface utilisateur<br />
+                <b>Une meilleure réutilisabilité</b>, même presentational avecdifférentes sources de données, dans différent container components.<br />
+                <u>ex: </u> user twitter List<br />
+                palette de votre application : tout sur page == doc, => designer, => tests de non régression<br />
+                ex: storybook<br />
+                <b>Bonne façon démarrer</b> : que presentation => passage de props, si trop de transfert alors container<br />
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">
               Presentational vs. Container
             </Text>
@@ -290,7 +425,18 @@ class Presentation extends React.Component {
             </List>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                Il est important de comprendre que la distinction entre les presentational components et les containers n’est pas technique… leur distinction se fait sur la responsabilité de chacun : l’un s’occupe de l’affichage et rendu, le second de la donnée et du comportement.
+                <br />
+                <b>1. Stateful et Stateless : </b> de façon générale les composants de présentation seront stateless et les container stateful (ex: collapse panel)
+                <b> ---- 2. Classes et fonctions : </b> Les presentational vont plus trendre à être des fonctions et les container des classes... Les fonctionnal components sont plus faciles à écrire, comprendre et tester donc je vous conseille d’en abuser à moins que vous ayez besoin de gérer un état, utiliser les méthodes du cycle de vie ou optimiser les performances
+                <b> ---- 3. Pure et impure : </b> Les presentational vont plus trendre à être pure
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">Other concepts</Text>
             <List textColor="tertiary">
               <Appear><ListItem>Stateful vs. Stateless</ListItem></Appear>
@@ -300,12 +446,34 @@ class Presentation extends React.Component {
           </Slide>
 
           {/* Higher Order Component */}
-          <Slide transition={['slide', 'spin']}>
+          <Slide
+            transition={['slide', 'spin']}
+            notes={
+              <div>
+                Les composants apportent une grande réutilisabilité des applications,<br />
+                mais comment faire si les différents composants de différents d’un domaine partagent le même comportement?<br />
+                A ces début, React proposait le <b>mécanisme des mixins</b>, nous permettant d'ajouter des comportement à nos composants<br />
+                Plus recommandé (certains problèmes), et non utilisable en ES6<br />
+                <b>Le pattern Higher order component ou HoC va nous venir en aide...</b>
+              </div>
+            }
+          >
             <Heading caps fit size={1} textColor="secondary">Higher-Order</Heading>
             <Heading caps fit size={1} textColor="tertiary">Component</Heading>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                Mais avant d'aborder les HoC il est important de connaitre les HoF<br />
+                L’HoF est un <b>concept de la programme fonctionnelle</b><br />
+                HoFs sont des <b>fonctions qui prennent une fonction en tant que paramètre</b>, en option certains autres paramètres, et retourne une fonction<br />
+                <b>HOC =</b> Traiter nos composants comme des fonctions et les améliorer avec des comportements communs<br />
+                Nous pouvons appliquer le même concept aux composants React et atteindre notre objectif de partager des fonctionnalités entre composants.
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">Higher-Order Function</Text>
             <Appear>
               <CodePane
@@ -336,7 +504,7 @@ class Presentation extends React.Component {
               <CodePane
                 lang="js"
                 textSize="1.1rem"
-                source={'logAdd(1, 2) // output : 1, 2'}
+                source={'logAdd(1, 2) // console output : 1, 2'}
               />
             </Appear>
           </Slide>
@@ -392,7 +560,20 @@ class Presentation extends React.Component {
             </Appear>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                <b>Isolation :</b> Il n'y a pas de risque de collision de propriétés au sein du composant.<br />
+                <b>Interopérabilité :</b> Ce principe s'adapte à tout composant React, peu importe la façon dont il a été défini.<br />
+                <b>Maintenabilité :</b> Le wrapper n'aura qu'une seule fonctionnalité, ce qui le rend plus simple à comprendre.<br />
+                <b>Le code composant sera-t-il plus clair lors de l'utilisation du HOC?</b> ---- Des HOC bien conçus indiquent ce qu'ils font réellement; Les modèles passent beaucoup de temps à expliquer comment ils le font.<br />
+                <b>La fonctionnalité apportée sera-t-elle plus facile à maintenir avec le HOC?</b>
+                <b>Le HOC a-t-il des dépendances?</b> : il fait trop ou trop peu<br />
+                <b>Le HOC peut-il être réutilisé dans d'autres applications?</b>
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">How do HOCs work ?</Text>
             <Appear>
               <BlockQuote>
@@ -447,7 +628,16 @@ class Presentation extends React.Component {
             />
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                Enfin, un concept important en FP qui peut être appliqué à React est la composition.<br/>
+                Les fonctions (et les composants) peuvent être combinées pour produire de nouvelles fonctions avec des caractéristiques et des propriétés plus avancées.<br/>
+                Suivant ce paradigme, nous avons de fonctions simples et concise, facilement testables, qui peuvent être composées ensemble.
+              </div>
+            }
+          >
             <Text caps bold textColor="secondary" textAlign="left">Compose All the Things</Text>
             <Appear>
               <CodePane
@@ -491,7 +681,16 @@ const square = x => x * x`
           </Slide>
 
           {/* Function As Child pattern */}
-          <Slide transition={['slide', 'spin']}>
+          <Slide
+            transition={['slide', 'spin']}
+            notes={
+              <div>
+                C’est un pattern qui gagne en consensus au sein de la communauté React, appelé Function as Child.
+                Il est largement utilisé dans la bibliothèque populaire react-motion.
+                Le concept principal est que, au lieu de passer un enfant sous la forme d'un composant, nous définissons une fonction qui peut recevoir des paramètres du parent.
+              </div>
+            }
+          >
             <Heading caps fit size={1} textColor="secondary">Function</Heading>
             <Heading caps fit size={1} textColor="tertiary">As Child</Heading>
           </Slide>
@@ -523,7 +722,7 @@ Name.propTypes = {
               <CodePane
                 lang="jsx"
                 textSize="1.3rem"
-                source={`<div>Hello, World!</div>`}
+                source={'<div>Hello, World!</div>'}
               />
             </Appear>
           </Slide>
@@ -658,19 +857,15 @@ Name.propTypes = {
               { loc: [6, 19] },
               { loc: [20, 23] },
             ]}
+            notes={
+              <div>
+                Si vous n'aimez pas mélanger le javascript pure et le JSX : jsx-control-statements<br />
+                plugin babel<br />
+                Uniquement du sucre syntaxique<br />
+                Si vous pensez que ça rendra votre code plus lisible, vous avez cette possibilité, c'est à vous de voir...
+              </div>
+            }
           />
-
-          <Slide transition={['fade']}>
-            <Text caps textColor="secondary" textAlign="left">jsx-control-statements</Text>
-            <Appear>
-              <CodePane
-                lang="jsx"
-                textSize="1.3rem"
-                source={require('raw!../assets/code/conditional-jsx.example')}
-              />
-            </Appear>
-          </Slide>
-
 
           {/* Communication patterns & tips */}
           <Slide transition={['slide', 'spin']} bgColor="secondary">

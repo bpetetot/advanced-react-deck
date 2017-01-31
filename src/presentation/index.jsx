@@ -560,32 +560,6 @@ class Presentation extends React.Component {
             </Appear>
           </Slide>
 
-          <Slide
-            transition={['fade']}
-            notes={
-              <div>
-                <b>Isolation :</b> Il n'y a pas de risque de collision de propriétés au sein du composant.<br />
-                <b>Interopérabilité :</b> Ce principe s'adapte à tout composant React, peu importe la façon dont il a été défini.<br />
-                <b>Maintenabilité :</b> Le wrapper n'aura qu'une seule fonctionnalité, ce qui le rend plus simple à comprendre.<br />
-                <b>Le code composant sera-t-il plus clair lors de l'utilisation du HOC?</b> ---- Des HOC bien conçus indiquent ce qu'ils font réellement; Les modèles passent beaucoup de temps à expliquer comment ils le font.<br />
-                <b>La fonctionnalité apportée sera-t-elle plus facile à maintenir avec le HOC?</b>
-                <b>Le HOC a-t-il des dépendances?</b> : il fait trop ou trop peu<br />
-                <b>Le HOC peut-il être réutilisé dans d'autres applications?</b>
-              </div>
-            }
-          >
-            <Text caps bold textColor="secondary" textAlign="left">How do HOCs work ?</Text>
-            <Appear>
-              <BlockQuote>
-                <Quote textSize="1.5em" textColor="tertiary">
-                  Higher-order components works by secretly wrapping the input
-                   component inside a container component.
-                </Quote>
-                <Cite textSize="1em" textColor="secondary">Andrew Clark (Facebook)</Cite>
-              </BlockQuote>
-            </Appear>
-          </Slide>
-
           <CodeSlide
             transition={['fade']}
             lang="jsx"
@@ -628,36 +602,6 @@ class Presentation extends React.Component {
             />
           </Slide>
 
-          <Slide
-            transition={['fade']}
-            notes={
-              <div>
-                Enfin, un concept important en FP qui peut être appliqué à React est la composition.<br/>
-                Les fonctions (et les composants) peuvent être combinées pour produire de nouvelles fonctions avec des caractéristiques et des propriétés plus avancées.<br/>
-                Suivant ce paradigme, nous avons de fonctions simples et concise, facilement testables, qui peuvent être composées ensemble.
-              </div>
-            }
-          >
-            <Text caps bold textColor="secondary" textAlign="left">Compose All the Things</Text>
-            <Appear>
-              <CodePane
-                lang="js"
-                textSize="1.1rem"
-                source={
-`const add = (x, y) => x + y
-const square = x => x * x`
-                }
-              />
-            </Appear>
-            <Appear>
-              <CodePane
-                lang="js"
-                textSize="1.1rem"
-                source={'const addAndSquare = (x, y) => square(add(x, y))'}
-              />
-            </Appear>
-          </Slide>
-
           <Slide transition={['fade']}>
             <Text caps bold textColor="secondary" textAlign="left">recompose</Text>
             <br />
@@ -672,12 +616,38 @@ const square = x => x * x`
             </BlockQuote>
           </Slide>
 
-          <Slide transition={['fade']}>
+          <Slide
+            transition={['fade']}
+            notes={
+                <div>
+                  Enfin, un concept important en FP qui peut être appliqué à React est la composition.<br/>
+                  HOC peuvent être combinées pour produire de nouveaux composants avec des caractéristiques et des propriétés plus avancées.<br/>
+                  Suivant ce paradigme, nous avons de HoC simples et concis, facilement testables, qui peuvent être composées ensemble.
+                </div>
+              }
+            >
             <CodePane
               lang="jsx"
               textSize="1.3rem"
               source={require('raw!../assets/code/recompose.example')}
             />
+          </Slide>
+
+          <Slide
+            transition={['fade']}
+            notes={
+              <div>
+                <b>Isolation :</b> Il n'y a pas de risque de collision de propriétés au sein du composant.<br />
+                <b>Interopérabilité :</b> Ce principe s'adapte à tout composant React, peu importe la façon dont il a été défini.<br />
+                <b>Maintenabilité :</b> Le wrapper n'aura qu'une seule fonctionnalité, ce qui le rend plus simple à comprendre.<br />
+                <b>Le code composant sera-t-il plus clair lors de l'utilisation du HOC?</b> ---- Des HOC bien conçus indiquent ce qu'ils font réellement; Les modèles passent beaucoup de temps à expliquer comment ils le font.<br />
+                <b>La fonctionnalité apportée sera-t-elle plus facile à maintenir avec le HOC?</b>
+                <b>Le HOC a-t-il des dépendances?</b> : il fait trop ou trop peu<br />
+                <b>Le HOC peut-il être réutilisé dans d'autres applications?</b>
+              </div>
+            }
+          >
+            <Heading caps fit size={3} textColor="secondary">How to make a good HoC ?</Heading>
           </Slide>
 
           {/* Function As Child pattern */}
